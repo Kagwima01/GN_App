@@ -10,9 +10,10 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {deleteProduct, updateProduct} from '../redux/actions/adminActions';
+import {updateProduct} from '../redux/actions/adminActions';
 import {useState} from 'react';
 import {useRoute} from '@react-navigation/native';
+import CheckBox from '@react-native-community/checkbox';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {COLORS, SIZES} from '../constants';
@@ -64,6 +65,16 @@ const UpdateProductScreen = ({navigation}) => {
 
       <ScrollView>
         <View style={isDarkMode ? styles.darkWrap : styles.lightWrap}>
+          <View style={styles.newWrapper}>
+            <View>
+              <Text style={isDarkMode ? styles.darkNewTxt : styles.lightNewTxt}>
+                Product is New ?
+              </Text>
+            </View>
+            <View style={styles.checkWrapper}>
+              <CheckBox value={productIsNew} onValueChange={setProductIsNew} />
+            </View>
+          </View>
           <View style={styles.inputWrapper}>
             <Text style={isDarkMode ? styles.darkInputL : styles.lightInputL}>
               Name
@@ -168,6 +179,25 @@ const styles = StyleSheet.create({
   lightBackground: {
     backgroundColor: COLORS.white,
     height: '100%',
+  },
+  newWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginTop: 5,
+  },
+  darkNewTxt: {
+    color: COLORS.gray5,
+    fontWeight: '600',
+    fontSize: SIZES.medium,
+  },
+  lightNewTxt: {
+    color: COLORS.gray2,
+    fontWeight: '600',
+    fontSize: SIZES.medium,
+  },
+  checkWrapper: {
+    marginLeft: 10,
   },
   darkWrap: {
     backgroundColor: COLORS.gray1,

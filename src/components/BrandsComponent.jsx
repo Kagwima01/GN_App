@@ -12,6 +12,7 @@ import {useEffect} from 'react';
 import BrandButton from './BrandButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {getBrands} from '../redux/actions/filtersActions';
+import {UIActivityIndicator} from 'react-native-indicators';
 
 const BrandsComponent = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -26,7 +27,7 @@ const BrandsComponent = () => {
     <View style={styles.container}>
       {loading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator
+          <UIActivityIndicator
             size={SIZES.xxLarge}
             color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
           />
@@ -62,6 +63,12 @@ const styles = StyleSheet.create({
   container: {
     height: SIZES.height / 2.5,
     paddingVertical: 5,
+  },
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
   },
   darkTError: {
     color: COLORS.gray5,

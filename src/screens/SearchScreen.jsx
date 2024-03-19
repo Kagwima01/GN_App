@@ -19,6 +19,7 @@ import ProductCard from '../components/ProductCard';
 import {getSearchProducts} from '../redux/actions/searchActions';
 import {useColorScheme} from 'react-native';
 import Heading from '../components/Heading';
+import {UIActivityIndicator} from 'react-native-indicators';
 
 const SearchScreen = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -66,7 +67,7 @@ const SearchScreen = () => {
       </View>
       <View style={styles.scroll}>
         {loading ? (
-          <ActivityIndicator
+          <UIActivityIndicator
             size={SIZES.xxLarge}
             color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
           />
@@ -98,6 +99,7 @@ const SearchScreen = () => {
               renderItem={({item}) => <ProductCard product={item} />}
               contentContainerStyle={styles.container}
               ItemSeparatorComponent={() => <View style={styles.separator} />}
+              ListFooterComponent={<View style={styles.bottom}></View>}
             />
           </View>
         )}
@@ -171,13 +173,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: SIZES.small,
     paddingLeft: SIZES.small / 4,
+    paddingBottom: 50,
   },
   separator: {
     height: 16,
   },
   scroll: {
-    height: SIZES.height - 130,
-    paddingVertical: 10,
+    height: '100%',
+    paddingTop: 10,
+    paddingBottom: 50,
   },
   image: {
     resizeMode: 'contain',
@@ -221,5 +225,8 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
     fontWeight: '700',
     alignSelf: 'center',
+  },
+  bottom: {
+    height: 80,
   },
 });

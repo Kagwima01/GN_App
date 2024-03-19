@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import React from 'react';
 import {useColorScheme} from 'react-native';
 import {COLORS, SIZES} from '../constants';
@@ -9,11 +9,14 @@ const BrandButton = ({brand}) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity
-      style={isDarkMode ? styles.darkBtn : styles.lightBtn}
+    <TouchableWithoutFeedback
       onPress={() => navigation.navigate('Brand', {brand})}>
-      <Text style={isDarkMode ? styles.darkTxt : styles.lightTxt}>{brand}</Text>
-    </TouchableOpacity>
+      <View style={isDarkMode ? styles.darkBtn : styles.lightBtn}>
+        <Text style={isDarkMode ? styles.darkTxt : styles.lightTxt}>
+          {brand}
+        </Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

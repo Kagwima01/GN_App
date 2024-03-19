@@ -15,7 +15,7 @@ const Headings = () => {
         New Rivals
       </Text>
       <TouchableOpacity
-        style={styles.discover}
+        style={isDarkMode ? styles.darkDiscover : styles.lightDiscover}
         onPress={() => {
           navigation.navigate('Featured');
         }}>
@@ -77,7 +77,18 @@ const styles = StyleSheet.create({
     fontSize: SIZES.large,
     color: COLORS.gray2,
   },
-  discover: {
+  darkDiscover: {
     flexDirection: 'row',
+    backgroundColor: COLORS.gray1,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    borderRadius: SIZES.xxSmall,
+  },
+  lightDiscover: {
+    flexDirection: 'row',
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    borderRadius: SIZES.xxSmall,
+    backgroundColor: '#a0aec091',
   },
 });

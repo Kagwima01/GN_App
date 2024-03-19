@@ -7,6 +7,7 @@ import {
 import React from 'react';
 import {COLORS, SIZES} from '../constants';
 import {useColorScheme} from 'react-native';
+import {UIActivityIndicator} from 'react-native-indicators';
 
 const CustomButton = ({title, onPress, isValid, loader}) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -20,7 +21,7 @@ const CustomButton = ({title, onPress, isValid, loader}) => {
           : styles.lightBtnStyle(isValid ? COLORS.secondary1 : COLORS.gray4)
       }>
       {loader ? (
-        <ActivityIndicator />
+        <UIActivityIndicator />
       ) : (
         <Text style={isDarkMode ? styles.darkBtnTxt : styles.lightBtnTxt}>
           {title}

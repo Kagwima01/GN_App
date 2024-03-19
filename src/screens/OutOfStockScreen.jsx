@@ -24,6 +24,8 @@ import {COLORS, SIZES} from '../constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {getOutOfStock} from '../redux/actions/productActions';
 import Navbar from '../components/Navbar';
+import {UIActivityIndicator} from 'react-native-indicators';
+
 const OutOfStockScreen = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -87,7 +89,7 @@ const OutOfStockScreen = () => {
         </View>
         {loading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator
+            <UIActivityIndicator
               size={SIZES.xxLarge}
               color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
             />

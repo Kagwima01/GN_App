@@ -4,6 +4,7 @@ export const initialState = {
   loading: false,
   error: null,
   products: [],
+  names: [],
   categories: [],
   brands: [],
 };
@@ -25,6 +26,11 @@ export const filtersSlice = createSlice({
       state.error = null;
       state.categories = payload;
     },
+    setNames: (state, {payload}) => {
+      state.loading = false;
+      state.error = null;
+      state.names = payload;
+    },
     setBrands: (state, {payload}) => {
       state.loading = false;
       state.error = null;
@@ -40,7 +46,7 @@ export const filtersSlice = createSlice({
 export const {
   setLoading,
   setError,
-
+  setNames,
   setCategories,
   setBrands,
   setProducts,

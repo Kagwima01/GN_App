@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
   useColorScheme,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import React from 'react';
 import {SIZES, COLORS} from '../constants';
@@ -19,83 +20,96 @@ const SavedItem = ({product}) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity
-      style={isDarkMode ? styles.containerDark : styles.containerLight}
+    <TouchableWithoutFeedback
       onPress={() => navigation.navigate('ProductScreen', {id: product.id})}>
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Image source={{uri: `${product.image}`}} style={styles.image} />
-        </View>
-        <View style={styles.details}>
-          <View style={styles.upperRow}>
-            <View style={styles.priceWrapper}>
-              <Text style={isDarkMode ? styles.darkPrice : styles.lightPrice}>
-                ksh {product.sellingPrice}
-              </Text>
-            </View>
-            <View>
-              <TouchableOpacity
-                style={isDarkMode ? styles.darkCloseBtn : styles.lightCloseBtn}
-                onPress={() => dispatch(removeSaveItem(product.id))}>
-                <MaterialCommunityIcons
-                  name={'close'}
-                  size={25}
-                  color={isDarkMode ? COLORS.gray5 : COLORS.gray1}
-                />
-              </TouchableOpacity>
-            </View>
+      <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
+        <View style={styles.container}>
+          <View style={styles.imageContainer}>
+            <Image source={{uri: `${product.image}`}} style={styles.image} />
           </View>
-          <View style={styles.upperRow}>
-            <View style={styles.categoryWrapper}>
+          <View style={styles.details}>
+            <View style={styles.upperRow}>
+              <View style={styles.priceWrapper}>
+                <Text style={isDarkMode ? styles.darkPrice : styles.lightPrice}>
+                  ksh {product.sellingPrice}
+                </Text>
+              </View>
+              <View>
+                <TouchableOpacity
+                  style={
+                    isDarkMode ? styles.darkCloseBtn : styles.lightCloseBtn
+                  }
+                  onPress={() => dispatch(removeSaveItem(product.id))}>
+                  <MaterialCommunityIcons
+                    name={'close'}
+                    size={25}
+                    color={isDarkMode ? COLORS.gray5 : COLORS.gray1}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.upperRow}>
+              <View style={styles.categoryWrapper}>
+                <Text
+                  style={
+                    isDarkMode ? styles.darkCategory : styles.lightCategory
+                  }>
+                  {product.category}
+                </Text>
+              </View>
+              <View style={styles.nameWrapper}>
+                <Text style={isDarkMode ? styles.darkName : styles.lightName}>
+                  {product.name}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.badgeWrapper}>
+              {product.stock === 0 ? (
+                <View
+                  style={
+                    isDarkMode ? styles.darkOutBadge : styles.lightOutBadge
+                  }>
+                  <Text
+                    style={
+                      isDarkMode ? styles.darkOutText : styles.lightOutText
+                    }>
+                    OUT OF STOCK
+                  </Text>
+                </View>
+              ) : product.productIsNew ? (
+                <View
+                  style={
+                    isDarkMode ? styles.darkNewBadge : styles.lightNewBadge
+                  }>
+                  <Text
+                    style={
+                      isDarkMode ? styles.darkNewText : styles.lightNewText
+                    }>
+                    New
+                  </Text>
+                </View>
+              ) : (
+                <View
+                  style={isDarkMode ? styles.darkInBadge : styles.lightInBadge}>
+                  <Text
+                    style={isDarkMode ? styles.darkInText : styles.lightInText}>
+                    IN Stock
+                  </Text>
+                </View>
+              )}
+            </View>
+            <View style={styles.descriptionWrapper}>
               <Text
-                style={isDarkMode ? styles.darkCategory : styles.lightCategory}>
-                {product.category}
+                style={
+                  isDarkMode ? styles.darkDescription : styles.lightDescription
+                }>
+                {product.description}
               </Text>
             </View>
-            <View style={styles.nameWrapper}>
-              <Text style={isDarkMode ? styles.darkName : styles.lightName}>
-                {product.name}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.badgeWrapper}>
-            {product.stock === 0 ? (
-              <View
-                style={isDarkMode ? styles.darkOutBadge : styles.lightOutBadge}>
-                <Text
-                  style={isDarkMode ? styles.darkOutText : styles.lightOutText}>
-                  OUT OF STOCK
-                </Text>
-              </View>
-            ) : product.productIsNew ? (
-              <View
-                style={isDarkMode ? styles.darkNewBadge : styles.lightNewBadge}>
-                <Text
-                  style={isDarkMode ? styles.darkNewText : styles.lightNewText}>
-                  New
-                </Text>
-              </View>
-            ) : (
-              <View
-                style={isDarkMode ? styles.darkInBadge : styles.lightInBadge}>
-                <Text
-                  style={isDarkMode ? styles.darkInText : styles.lightInText}>
-                  IN Stock
-                </Text>
-              </View>
-            )}
-          </View>
-          <View style={styles.descriptionWrapper}>
-            <Text
-              style={
-                isDarkMode ? styles.darkDescription : styles.lightDescription
-              }>
-              {product.description}
-            </Text>
           </View>
         </View>
       </View>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   );
 };
 

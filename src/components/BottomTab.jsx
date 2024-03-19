@@ -2,24 +2,21 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import {COLORS} from '../constants';
+import {COLORS, SIZES} from '../constants';
 import {useColorScheme} from 'react-native';
-import {useSelector} from 'react-redux';
 
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import SavedScreen from '../screens/SavedScreen';
-import HelpScreen from '../screens/HelpScreen';
 import InfoScreen from '../screens/InfoScreen';
-import AdminConsoleScreen from '../screens/AdminConsoleScreen';
 import ProductsScreen from '../screens/ProductsScreen';
+import ProductListScreen from '../screens/ProductListScreen';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTab = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const user = useSelector(state => state.user);
-  const {userInfo} = user;
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -28,12 +25,17 @@ const BottomTab = () => {
         headerShown: false,
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: isDarkMode ? COLORS.gray3 : COLORS.gray7,
+          borderRadius: 15,
+          backgroundColor: isDarkMode ? '#4a5568cb' : '#a0aec093',
+          marginVertical: 5,
           bottom: 0,
           right: 0,
           left: 0,
           elevation: 0,
-          height: 55,
+          height: 60,
+          width: SIZES.width - 10,
+          marginHorizontal: 5,
+          borderTopWidth: 0,
         },
       }}>
       <Tab.Screen
@@ -45,10 +47,32 @@ const BottomTab = () => {
             color: isDarkMode ? COLORS.gray5 : COLORS.black,
             fontWeight: 'bold',
             fontSize: 12,
+            paddingBottom: 10,
           },
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name={focused ? 'home' : 'home-outline'}
+              color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
+              size={24}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="List"
+        component={ProductListScreen}
+        options={{
+          tabBarLabel: 'List',
+
+          tabBarLabelStyle: {
+            color: isDarkMode ? COLORS.gray5 : COLORS.black,
+            fontWeight: 'bold',
+            fontSize: 12,
+            paddingBottom: 10,
+          },
+          tabBarIcon: ({focused}) => (
+            <Ionicons
+              name={focused ? 'list' : 'list-outline'}
               color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
               size={24}
             />
@@ -65,10 +89,11 @@ const BottomTab = () => {
             color: isDarkMode ? COLORS.gray5 : COLORS.black,
             fontWeight: 'bold',
             fontSize: 12,
+            paddingBottom: 10,
           },
-          tabBarIcon: () => (
-            <MaterialCommunityIcons
-              name="apps"
+          tabBarIcon: ({focused}) => (
+            <Ionicons
+              name={focused ? 'apps' : 'apps-outline'}
               color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
               size={24}
             />
@@ -84,6 +109,7 @@ const BottomTab = () => {
             color: isDarkMode ? COLORS.gray5 : COLORS.black,
             fontWeight: 'bold',
             fontSize: 12,
+            paddingBottom: 10,
           },
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
@@ -103,6 +129,7 @@ const BottomTab = () => {
             color: isDarkMode ? COLORS.gray5 : COLORS.black,
             fontWeight: 'bold',
             fontSize: 12,
+            paddingBottom: 10,
           },
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
@@ -122,6 +149,7 @@ const BottomTab = () => {
             color: isDarkMode ? COLORS.gray5 : COLORS.black,
             fontWeight: 'bold',
             fontSize: 12,
+            paddingBottom: 10,
           },
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons

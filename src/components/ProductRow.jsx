@@ -12,6 +12,7 @@ import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useColorScheme} from 'react-native';
 import ProductCard from './ProductCard';
+import {BarIndicator} from 'react-native-indicators';
 
 const ProductRow = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -27,10 +28,13 @@ const ProductRow = () => {
   return (
     <View style={styles.productRowContainer}>
       {loading ? (
-        <ActivityIndicator
-          size={SIZES.xxLarge}
-          color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
-        />
+        <View style={styles.loadingContainer}>
+          <BarIndicator
+            size={30}
+            color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
+            count={4}
+          />
+        </View>
       ) : error ? (
         <>
           <Text style={isDarkMode ? styles.darkTError : styles.lightTError}>
@@ -41,12 +45,15 @@ const ProductRow = () => {
           </Text>
         </>
       ) : (
-        <FlatList
-          data={newProducts}
-          keyExtractor={item => item._id}
-          renderItem={({item}) => <ProductCard product={item} />}
-          horizontal={true}
-        />
+        <View style={styles.itemsContainer}>
+          <FlatList
+            data={newProducts}
+            keyExtractor={item => item._id}
+            renderItem={({item}) => <ProductCard product={item} />}
+            horizontal={true}
+            ListFooterComponent={<View style={styles.botttom}></View>}
+          />
+        </View>
       )}
     </View>
   );
@@ -59,9 +66,18 @@ const styles = StyleSheet.create({
     marginTop: SIZES.small,
     marginLeft: 12,
   },
+
   container: {
     paddingVertical: 2,
   },
+
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+
   darkTError: {
     color: COLORS.gray5,
     fontSize: SIZES.large,
@@ -86,5 +102,9 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
     fontWeight: '700',
     alignSelf: 'center',
+  },
+
+  botttom: {
+    //height: 80,
   },
 });

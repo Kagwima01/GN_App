@@ -5,9 +5,28 @@ import {
   setError,
   setLoading,
   setProducts,
+  setNames,
 } from '../slices/filters';
 import {ipAddress} from '../../constants';
 
+export const getNames = () => async dispatch => {
+  dispatch(setLoading());
+  try {
+    const {data} = await axios.get(`${ipAddress}/api/filters/names`);
+    const names = data;
+    dispatch(setNames(names));
+  } catch (error) {
+    dispatch(
+      setError(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+          ? error.message
+          : 'An expected error has occured. Please try again later.',
+      ),
+    );
+  }
+};
 export const getCategories = () => async dispatch => {
   dispatch(setLoading());
   try {
@@ -46,6 +65,24 @@ export const getBrands = () => async dispatch => {
   }
 };
 
+export const getProductsByName = name => async dispatch => {
+  dispatch(setLoading());
+  try {
+    const {data} = await axios.get(`${ipAddress}/api/products/name/${name}`);
+
+    dispatch(setProducts(data));
+  } catch (error) {
+    dispatch(
+      setError(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+          ? error.message
+          : 'An expected error has occured. Please try again later.',
+      ),
+    );
+  }
+};
 export const getProductsByCategory = category => async dispatch => {
   dispatch(setLoading());
   try {

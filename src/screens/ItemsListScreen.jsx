@@ -10,72 +10,73 @@ import {COLORS, SIZES} from '../constants';
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useColorScheme} from 'react-native';
-import {getProductsByCategory} from '../redux/actions/filtersActions';
+import {getProductsByName} from '../redux/actions/filtersActions';
 import {useRoute} from '@react-navigation/native';
 import ProductCard from '../components/ProductCard';
 import Heading from '../components/Heading';
+import {BarIndicator} from 'react-native-indicators';
 
-const CategoryScreen = () => {
+const ItemsListScreen = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const dispatch = useDispatch();
   const route = useRoute();
-  const {category} = route.params;
+  const {name} = route.params;
   const {loading, error, products} = useSelector(state => state.filters);
   useEffect(() => {
-    dispatch(getProductsByCategory(category));
+    dispatch(getProductsByName(name));
   }, [dispatch]);
   return (
     <SafeAreaView
       style={isDarkMode ? styles.darkBackground : styles.lightBackground}>
-      <Heading title={category} />
-      <View style={styles.scroll}>
-        {loading ? (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator
-              size={SIZES.xxLarge}
-              color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
-            />
-          </View>
-        ) : error ? (
+      <Heading title={name} />
+      {loading ? (
+        <View style={styles.loadingContainer}>
+          <BarIndicator
+            size={30}
+            count={4}
+            color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
+          />
+        </View>
+      ) : error ? (
+        <>
+          <Text style={isDarkMode ? styles.darkTError : styles.lightTError}>
+            We are Sorry!
+          </Text>
+          <Text style={isDarkMode ? styles.darkError : styles.lightError}>
+            {error}
+          </Text>
+        </>
+      ) : (
+        products && (
           <>
-            <Text style={isDarkMode ? styles.darkTError : styles.lightTError}>
-              We are Sorry!
-            </Text>
-            <Text style={isDarkMode ? styles.darkError : styles.lightError}>
-              {error}
-            </Text>
+            <View style={styles.container}>
+              <FlatList
+                data={products}
+                keyExtractor={item => item._id}
+                numColumns={2}
+                renderItem={({item}) => <ProductCard product={item} />}
+                contentContainerStyle={styles.container}
+                ItemSeparatorComponent={() => <View style={styles.separator} />}
+                ListFooterComponentStyle={<View style={styles.bottom}></View>}
+              />
+            </View>
           </>
-        ) : (
-          products && (
-            <>
-              <View style={styles.container}>
-                <FlatList
-                  data={products}
-                  keyExtractor={item => item._id}
-                  numColumns={2}
-                  renderItem={({item}) => <ProductCard product={item} />}
-                  contentContainerStyle={styles.container}
-                  ItemSeparatorComponent={() => (
-                    <View style={styles.separator} />
-                  )}
-                />
-              </View>
-            </>
-          )
-        )}
-      </View>
+        )
+      )}
     </SafeAreaView>
   );
 };
 
-export default CategoryScreen;
+export default ItemsListScreen;
 
 const styles = StyleSheet.create({
   darkBackground: {
     backgroundColor: COLORS.gray2,
+    height: '100%',
   },
   lightBackground: {
     backgroundColor: COLORS.white,
+    height: '100%',
   },
   loadingContainer: {
     flex: 1,
@@ -89,13 +90,10 @@ const styles = StyleSheet.create({
     paddingTop: SIZES.small,
     paddingLeft: SIZES.small / 4,
     justifyContent: 'space-between',
-    marginBottom: 50,
+    paddingBottom: 50,
   },
   separator: {
     height: 16,
-  },
-  scroll: {
-    height: SIZES.height - 50,
   },
   darkTError: {
     color: COLORS.gray5,
@@ -121,5 +119,8 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
     fontWeight: '700',
     alignSelf: 'center',
+  },
+  bottom: {
+    height: 80,
   },
 });

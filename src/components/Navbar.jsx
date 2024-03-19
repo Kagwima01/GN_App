@@ -40,7 +40,7 @@ const Navbar = () => {
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
               <Text
                 style={isDarkMode ? styles.darkSignTxt : styles.lightSignTxt}>
-                Sighn In
+                Sign In
               </Text>
             </TouchableOpacity>
           </View>

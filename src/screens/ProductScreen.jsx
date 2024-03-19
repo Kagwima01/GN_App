@@ -34,7 +34,7 @@ import {COLORS, SIZES} from '../constants';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
 import {useNavigation} from '@react-navigation/native';
-
+import {BarIndicator} from 'react-native-indicators';
 const AmountSchema = Yup.object().shape({
   amount: Yup.number()
     .min(1, 'Least amount is 1 piece')
@@ -118,8 +118,9 @@ const ProductScreen = () => {
       style={isDarkMode ? styles.darkContainer : styles.lightContainer}>
       {loading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator
-            size={SIZES.xxLarge}
+          <BarIndicator
+            count={4}
+            size={30}
             color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
           />
         </View>

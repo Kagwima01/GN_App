@@ -41,10 +41,11 @@ const styles = StyleSheet.create({
   },
   darkContainer: {
     backgroundColor: COLORS.gray2,
-    height: 495,
+    height: 480,
+    paddingBottom: 50,
   },
   lightContainer: {
-    height: 495,
+    height: 480,
     backgroundColor: COLORS.white,
   },
 });

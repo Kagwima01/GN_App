@@ -23,6 +23,8 @@ import FeaturedScreen from './screens/FeaturedScreen';
 import CategoryScreen from './screens/CategoryScreen';
 import BrandScreen from './screens/BrandScreen';
 import UpdateProductScreen from './screens/UpdateProductScreen';
+import ItemsListScreen from './screens/ItemsListScreen';
+import ProductListScreen from './screens/ProductListScreen';
 
 //redux
 import {Provider} from 'react-redux';
@@ -56,9 +58,24 @@ const App = () => {
                 headerShown: false,
               }}
             />
+
             <Stack.Screen
               name="Featured"
               component={FeaturedScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Names"
+              component={ProductListScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Items"
+              component={ItemsListScreen}
               options={{
                 headerShown: false,
               }}

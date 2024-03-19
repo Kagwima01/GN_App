@@ -3,7 +3,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
   Alert,
   Image,
@@ -131,7 +131,7 @@ const ProfileScreen = ({navigation}) => {
                     style={
                       isDarkMode ? styles.darkMenuText : styles.lightMenuText
                     }>
-                    Sighn Up{' '}
+                    Sign Up
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -160,7 +160,7 @@ const ProfileScreen = ({navigation}) => {
                   }>
                   {userInfo.isAdmin && (
                     <>
-                      <TouchableOpacity
+                      <TouchableWithoutFeedback
                         onPress={() => navigation.navigate('Sales')}>
                         <View
                           style={
@@ -182,8 +182,8 @@ const ProfileScreen = ({navigation}) => {
                             Daily Sales
                           </Text>
                         </View>
-                      </TouchableOpacity>
-                      <TouchableOpacity
+                      </TouchableWithoutFeedback>
+                      <TouchableWithoutFeedback
                         onPress={() => navigation.navigate('OutOfStock')}>
                         <View
                           style={
@@ -205,11 +205,11 @@ const ProfileScreen = ({navigation}) => {
                             Out Of Stock
                           </Text>
                         </View>
-                      </TouchableOpacity>
+                      </TouchableWithoutFeedback>
                     </>
                   )}
 
-                  <TouchableOpacity onPress={() => clearCacheHandler()}>
+                  <TouchableWithoutFeedback onPress={() => clearCacheHandler()}>
                     <View
                       style={
                         isDarkMode
@@ -228,8 +228,8 @@ const ProfileScreen = ({navigation}) => {
                         Clear Cache
                       </Text>
                     </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => logoutHandler()}>
+                  </TouchableWithoutFeedback>
+                  <TouchableWithoutFeedback onPress={() => logoutHandler()}>
                     <View
                       style={
                         isDarkMode
@@ -248,8 +248,9 @@ const ProfileScreen = ({navigation}) => {
                         Logout
                       </Text>
                     </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => deleteAccountHandler()}>
+                  </TouchableWithoutFeedback>
+                  <TouchableWithoutFeedback
+                    onPress={() => deleteAccountHandler()}>
                     <View
                       style={
                         isDarkMode
@@ -268,7 +269,7 @@ const ProfileScreen = ({navigation}) => {
                         Delete Account
                       </Text>
                     </View>
-                  </TouchableOpacity>
+                  </TouchableWithoutFeedback>
                 </View>
               </ScrollView>
             </>

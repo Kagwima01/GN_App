@@ -65,6 +65,7 @@ const SavedScreen = () => {
               keyExtractor={item => item.id}
               renderItem={({item}) => <SavedItem product={item} />}
               ItemSeparatorComponent={() => <View style={styles.separator} />}
+              ListFooterComponent={<View style={styles.bottom}></View>}
             />
           </View>
         )}
@@ -79,12 +80,10 @@ const styles = StyleSheet.create({
   containerDark: {
     backgroundColor: COLORS.gray2,
     height: SIZES.height,
-    paddingBottom: 190,
   },
   containerLight: {
     backgroundColor: COLORS.white,
     height: SIZES.height,
-    paddingBottom: 190,
   },
   loadingContainer: {
     flex: 1,
@@ -160,5 +159,11 @@ const styles = StyleSheet.create({
     color: COLORS.secondary1,
     fontSize: SIZES.medium,
     fontWeight: '600',
+  },
+  bottom: {
+    height: 80,
+  },
+  itemsContainer: {
+    paddingBottom: 80,
   },
 });

@@ -18,6 +18,7 @@ import {COLORS, SIZES} from '../constants';
 import React from 'react';
 import {useColorScheme} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {BarIndicator} from 'react-native-indicators';
 
 const ProductsScreen = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -40,8 +41,9 @@ const ProductsScreen = () => {
       <View style={styles.scroll}>
         {loading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator
-              size={SIZES.xxLarge}
+            <BarIndicator
+              count={4}
+              size={30}
               color={isDarkMode ? COLORS.primary1 : COLORS.secondary1}
             />
           </View>
